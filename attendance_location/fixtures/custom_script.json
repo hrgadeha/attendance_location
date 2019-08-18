@@ -1,0 +1,14 @@
+[
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Attendance", 
+  "modified": "2019-06-05 17:16:37.728384", 
+  "name": "Attendance-Client", 
+  "parent": null, 
+  "parentfield": null, 
+  "parenttype": null, 
+  "script": "frappe.ui.form.on('Attendance', {\n\tvalidate(frm) {\n\t\tif (!frm.doc.location && frm.doc.latitude && frm.doc.longitude) {\n\t\t\tfrm.fields_dict.location.map.setView([frm.doc.latitude, frm.doc.longitude], 13);\n\t\t}\n\t\telse {\n\t\t\tfrm.doc.latitude = frm.fields_dict.location.map.getCenter()['lat'];\n\t\t\tfrm.doc.longitude = frm.fields_dict.location.map.getCenter()['lng'];\n\t\t}\n\t},\n});\n\nfrappe.ui.form.on(\"Attendance\", \"google_map\", function(frm) {\n   window.open(\"http://www.google.com/maps/place/\" + frm.doc.latitude + \",\" + frm.doc.longitude)\n});", 
+  "script_type": "Client"
+ }
+]
